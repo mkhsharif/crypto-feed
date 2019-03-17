@@ -17,14 +17,17 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
     let check = UIImage(named: "checkmark")
     var delegate: EditList?
     
+   
+
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var tableView: UITableView!
     
 
+    
     override func viewDidLoad() {
         
         pairs = (delegate?.getPairs())!
         currentPairs = pairs
-        
     }
     
     
@@ -58,19 +61,19 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
     
    //search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard let text = searchBar.text else { return false }
-        currentPairs = pairs.filter({pairs -> Bool in pairs.pair.contains(searchBar.text)})
+        print("HERE SEARCH")
+        guard !searchText.isEmpty else {
+            searchBar.text = searchText.uppercased()
+            currentPairs = pairs
+            tableView.reloadData()
+            return
+            
+        }
+        currentPairs = pairs.filter({ pairs -> Bool in
+            return pairs.pair.contains(searchText.uppercased())
+        })
+        tableView.reloadData()
     }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        <#code#>
-    }
-    
-//    func addPair(pair: String) {
-//        // get price pair
-//        prices.append(Price(ticker: pair, price: 0.0, percentChange: 0.0))
-//    }
-//
 }
 
 class Pair {
