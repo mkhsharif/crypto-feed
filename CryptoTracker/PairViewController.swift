@@ -61,16 +61,14 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
     
    //search bar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("HERE SEARCH")
         guard !searchText.isEmpty else {
-            searchBar.text = searchText.uppercased()
             currentPairs = pairs
             tableView.reloadData()
             return
             
         }
         currentPairs = pairs.filter({ pairs -> Bool in
-            return pairs.pair.contains(searchText.uppercased())
+            return pairs.pair.contains(searchText)
         })
         tableView.reloadData()
     }
