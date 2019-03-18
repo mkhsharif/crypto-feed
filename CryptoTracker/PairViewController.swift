@@ -26,6 +26,8 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         
+        self.title = "Pairs"
+        
         pairs = (delegate?.getPairs())!
         currentPairs = pairs
     }

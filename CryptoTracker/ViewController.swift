@@ -31,7 +31,7 @@ struct LastPrice: Decodable {
     let lastPrice: String
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate, WKNavigationDelegate,EditList {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate, WKNavigationDelegate, EditList {
 
     
     
@@ -127,10 +127,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // on segue (plus button) we can change things about the file before it loads
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as! PairViewController
-        vc.delegate = self
+        let pairVC = segue.destination as! PairViewController
+        pairVC.delegate = self
+    }
+    
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        return CGSize(width: view.frame.width, height: view.frame.height)
+//    }
+    
+    // orientation management
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+//        print(UIDevice.current.orientation.isLandscape)
+      
+        
     }
    
+    
     
     func addPair(pair: String) {
         
