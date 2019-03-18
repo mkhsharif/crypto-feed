@@ -54,10 +54,21 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        
         currentPairs[indexPath.row].added = !currentPairs[indexPath.row].added
         
-        self.delegate?.addPair(pair: currentPairs[indexPath.row].pair)
-        
+        if(currentPairs[indexPath.row].added) {
+            self.delegate?.addPair(pair: currentPairs[indexPath.row].pair)
+        } else {
+            var count = 0
+            for price in (self.delegate?.getPrices())! {
+                if currentPairs[indexPath.row].pair == price.ticker {
+                    self.delegate?.removePrice(index: count)
+                }
+                 count += 1
+            }
+        }
         tableView.reloadData()
     }
     
@@ -74,7 +85,9 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
         })
         tableView.reloadData()
     }
+    
 }
+
 
 class Pair {
     var pair = ""

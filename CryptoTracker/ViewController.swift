@@ -13,6 +13,8 @@ import WebKit
 protocol EditList {
     func addPair(pair: String)
     func getPairs() -> [Pair]
+    func getPrices() -> [Price]
+    func removePrice(index: Int)
 }
 
 struct Ticker: Decodable {
@@ -125,6 +127,22 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         webView.load(URLRequest(url: url!))
     }
     
+    // make table view cell editable
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    // handle deleted cell
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        for pair in pairs {
+            if prices[indexPath.row].ticker == pair.pair {
+                pair.added = false
+            }
+        }
+        prices.remove(at: indexPath.row)
+        tableView.reloadData()
+    }
+    
     // on segue (plus button) we can change things about the file before it loads
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let pairVC = segue.destination as! PairViewController
@@ -143,7 +161,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
    
     
-    
+    // fetch data from binance and display it within the table
     func addPair(pair: String) {
         
         let urlReq = "https://api.binance.com/api/v1/ticker/24hr?symbol=\(pair)"
@@ -169,6 +187,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }.resume()
     
+    }
+    
+    func removePrice(index: Int) {
+        prices.remove(at: index)
+        tableView.reloadData()
     }
     
     
@@ -208,6 +231,10 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func getPairs() -> [Pair] {
         return pairs
+    }
+    
+    func getPrices() -> [Price] {
+        return prices
     }
 
 }
