@@ -81,6 +81,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
             }.resume()
         
+        let timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updatePrices), userInfo: nil, repeats: true)
         
     }
     
@@ -195,11 +196,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     
+    @objc func test() {
+        print("UPDATED")
+    }
+    
     @objc func updatePrices() {
         for price in prices {
             let urlReq = "https://api.binance.com/api/v1/ticker/24hr?symbol=\(price.ticker)"
             
-            print(urlReq)
+            //print(urlReq)
             
             guard let url = URL(string: urlReq) else { return }
             print(url)
@@ -213,8 +218,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     print(lastPrice)
                     price.price = lastPrice.lastPrice
                     price.percentChange = lastPrice.priceChangePercent
-                   
-                    self.tableView.reloadData()
+            
                     
                 } catch let jsonErr {
                     print("Error: ", jsonErr)
@@ -222,12 +226,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }.resume()
             
         }
+        self.tableView.reloadData()
         
     }
-    
-    
-  
-    
     
     func getPairs() -> [Pair] {
         return pairs
