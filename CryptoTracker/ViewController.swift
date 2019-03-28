@@ -8,6 +8,7 @@
 
 import UIKit
 import WebKit
+import CoreData
 
 
 protocol EditList {
@@ -34,6 +35,8 @@ struct LastPrice: Decodable {
 }
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate, WKNavigationDelegate, EditList {
+    
+
 
     
     
@@ -48,40 +51,90 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     //var pairs = [String: Bool]()
     
+    // store data locally
+    let defaults = UserDefaults.standard
     
-
     
     override func viewDidLoad() {
+       
         
-        self.title = "Profit Trail"
+        let fetchReqPrice: NSFetchRequest<Price> = Price.fetchRequest()
+        let fetchReqPair: NSFetchRequest<Pair> = Pair.fetchRequest()
         
-        let jsonUrlString = "https://api.binance.com/api/v1/exchangeInfo"
+        do {
+            let pairs = try PersistenceService.context.fetch(fetchReqPair)
+            let prices = try PersistenceService.context.fetch(fetchReqPrice)
+            self.pairs = pairs
+            self.prices = prices
+            self.tableView.reloadData()
+        } catch {}
         
-        guard let url = URL(string: jsonUrlString) else { return }
+       
         
-        URLSession.shared.dataTask(with: url) {(data, res, err) in
-            // check err
-            // check response status 200 OK
-            guard let data = data else { return }
-            print(data)
-            do {
-                let ticker = try JSONDecoder().decode(Ticker.self, from: data)
-                for i in 0...ticker.symbols.count - 1 {
-                    //self.pairs[ticker.symbols[i].symbol] = false
-                    self.pairs.append(Pair(
-                        pair: ticker.symbols[i].symbol,
-                        base: ticker.symbols[i].baseAsset,
-                        quote: ticker.symbols[i].quoteAsset,
-                        added: false))
+//        do {
+//            let pairs = try PersistenceService.context.fetch(fetchReqPair)
+//            self.pairs = pairs
+//            let prices = try PersistenceService.context.fetch(fetchReqPrice)
+//            self.prices = prices
+//        } catch {}
+        
+        
+         let pairk = Pair(context: PersistenceService.context)
+        
+        self.title = "Crypto Feed"
+        
+        if(true) {
+            
+            let jsonUrlString = "https://api.binance.com/api/v1/exchangeInfo"
+            
+            guard let url = URL(string: jsonUrlString) else { return }
+            
+            URLSession.shared.dataTask(with: url) {(data, res, err) in
+                // check err
+                // check response status 200 OK
+                guard let data = data else { return }
+                print(data)
+                do {
+                    let ticker = try JSONDecoder().decode(Ticker.self, from: data)
+                    //let Pair = Pair(context: PersistenceService.context)
+                    for i in 0...ticker.symbols.count - 1 {
+                        //self.pairs[ticker.symbols[i].symbol] = false
+                        let pair = Pair(context: PersistenceService.context)
+                        pair.pair = ticker.symbols[i].symbol
+                        pair.base = ticker.symbols[i].baseAsset
+                        pair.quote = ticker.symbols[i].quoteAsset
+                        pair.added = false
+                        
+                       
+                        self.pairs.append(pair)
+                        
+//                        self.pairs.append(Pair(
+//                            pair: ticker.symbols[i].symbol,
+//                            base: ticker.symbols[i].baseAsset,
+//                            quote: ticker.symbols[i].quoteAsset,
+//                            added: false))
+                    }
+                    // sort alphabetically
+                    //self.pairs.sort {$0.pair < $1.pair}
+                    
+                   
+                    print("DONE")
+                    PersistenceService.saveContext()
+                    
+                    
+                } catch let jsonErr {
+                    print("Error: ", jsonErr)
                 }
-                
-                self.pairs.sort {$0.pair < $1.pair}
-            } catch let jsonErr {
-                print("Error: ", jsonErr)
-            }
             }.resume()
         
+       } else {
+            //pairs = self.defaults.array(forKey: "pairs") as! [Pair]
+        }
+        
+        
+        
         let timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updatePrices), userInfo: nil, repeats: true)
+        
         
     }
     
@@ -103,20 +156,20 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
          cell.tickerOutlet.text = prices[indexPath.row].ticker
         
         // show price
-        if Double(prices[indexPath.row].price)! >= 1.0 {
-            let curPrice = round(100.0 * Double(prices[indexPath.row].price)!) / 100.0
+        if Double(prices[indexPath.row].price!)! >= 1.0 {
+            let curPrice = round(100.0 * Double(prices[indexPath.row].price!)!) / 100.0
             cell.priceOutlet.text = "$\(curPrice)"
         } else {
-            cell.priceOutlet.text = "$\(prices[indexPath.row].price)"
+            cell.priceOutlet.text = "$\(prices[indexPath.row].price!)"
         }
         
         // show percent change
-        if Double(prices[indexPath.row].percentChange)! >= 0.0 {
+        if Double(prices[indexPath.row].percentChange!)! >= 0.0 {
             cell.percentChangeOutlet!.backgroundColor = UIColor.green
-            cell.percentChangeOutlet.text = "+\(prices[indexPath.row].percentChange)%"
+            cell.percentChangeOutlet.text = "+\(prices[indexPath.row].percentChange!)%"
         } else {
             cell.percentChangeOutlet!.backgroundColor = UIColor.red
-            cell.percentChangeOutlet.text = "\(prices[indexPath.row].percentChange)%"
+            cell.percentChangeOutlet.text = "\(prices[indexPath.row].percentChange!)%"
         }
         
         return cell
@@ -124,7 +177,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let url = URL(string: "https://www.tradingview.com/chart/?symbol=BINANCE:\(prices[indexPath.row].ticker)")
+        let url = URL(string: "https://www.tradingview.com/chart/?symbol=BINANCE:\(prices[indexPath.row].ticker!)")
         webView.load(URLRequest(url: url!))
     }
     
@@ -179,14 +232,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             do {
                 let lastPrice = try JSONDecoder().decode(LastPrice.self, from: data)
                 print(lastPrice)
-                self.prices.append(Price(ticker: lastPrice.symbol, price: lastPrice.lastPrice, percentChange: lastPrice.priceChangePercent))
                 
-                 self.tableView.reloadData()
+                let price = Price(context: PersistenceService.context)
+                price.price = lastPrice.lastPrice
+                price.percentChange = lastPrice.priceChangePercent
+                price.ticker = lastPrice.symbol
+                
+                self.prices.append(price)
+                
+                
+//                self.prices.append(Price(price: lastPrice.lastPrice, percentChange: lastPrice.priceChangePercent, ticker: lastPrice.symbol))
+                
+          
+                
                 
             } catch let jsonErr {
                 print("Error: ", jsonErr)
             }
         }.resume()
+        
+         PersistenceService.saveContext()
+         self.tableView.reloadData()
     
     }
     
@@ -240,17 +306,17 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 }
 
-class Price {
-    var ticker = ""
-    var price = ""
-    var percentChange = ""
-    
-    convenience init(ticker: String, price: String, percentChange: String) {
-        self.init()
-        self.ticker = ticker
-        self.price = price
-        self.percentChange = percentChange
-    }
-}
+//class Price: NSObject {
+//    var ticker = ""
+//    var price = ""
+//    var percentChange = ""
+//
+////    convenience init(ticker: String, price: String, percentChange: String) {
+////        self.init()
+////        self.ticker = ticker
+////        self.price = price
+////        self.percentChange = percentChange
+////    }
+//}
 
 

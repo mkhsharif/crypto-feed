@@ -18,6 +18,12 @@
 		588867332239E23C0051377B /* PriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 588867322239E23C0051377B /* PriceCell.swift */; };
 		58886739223A38590051377B /* PairCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58886738223A38590051377B /* PairCell.swift */; };
 		5888673B223A48BA0051377B /* PairViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888673A223A48BA0051377B /* PairViewController.swift */; };
+		58DF2AAA2241B809002FBF7E /* PersistenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DF2AA92241B809002FBF7E /* PersistenceService.swift */; };
+		58DF2AD3224C1D51002FBF7E /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 58DF2AD1224C1D51002FBF7E /* Model.xcdatamodeld */; };
+		58DF2AD8224C2F55002FBF7E /* Price+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DF2AD4224C2F55002FBF7E /* Price+CoreDataClass.swift */; };
+		58DF2AD9224C2F55002FBF7E /* Price+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DF2AD5224C2F55002FBF7E /* Price+CoreDataProperties.swift */; };
+		58DF2ADA224C2F55002FBF7E /* Pair+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DF2AD6224C2F55002FBF7E /* Pair+CoreDataClass.swift */; };
+		58DF2ADB224C2F55002FBF7E /* Pair+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DF2AD7224C2F55002FBF7E /* Pair+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +61,12 @@
 		588867322239E23C0051377B /* PriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceCell.swift; sourceTree = "<group>"; };
 		58886738223A38590051377B /* PairCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairCell.swift; sourceTree = "<group>"; };
 		5888673A223A48BA0051377B /* PairViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PairViewController.swift; sourceTree = "<group>"; };
+		58DF2AA92241B809002FBF7E /* PersistenceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceService.swift; sourceTree = "<group>"; };
+		58DF2AD2224C1D51002FBF7E /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		58DF2AD4224C2F55002FBF7E /* Price+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Price+CoreDataClass.swift"; sourceTree = "<group>"; };
+		58DF2AD5224C2F55002FBF7E /* Price+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Price+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		58DF2AD6224C2F55002FBF7E /* Pair+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pair+CoreDataClass.swift"; sourceTree = "<group>"; };
+		58DF2AD7224C2F55002FBF7E /* Pair+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Pair+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +117,11 @@
 		5888670322380D160051377B /* CryptoTracker */ = {
 			isa = PBXGroup;
 			children = (
+				58DF2AD4224C2F55002FBF7E /* Price+CoreDataClass.swift */,
+				58DF2AD5224C2F55002FBF7E /* Price+CoreDataProperties.swift */,
+				58DF2AD6224C2F55002FBF7E /* Pair+CoreDataClass.swift */,
+				58DF2AD7224C2F55002FBF7E /* Pair+CoreDataProperties.swift */,
+				58DF2AA92241B809002FBF7E /* PersistenceService.swift */,
 				5888670422380D160051377B /* AppDelegate.swift */,
 				5888670622380D160051377B /* ViewController.swift */,
 				588867322239E23C0051377B /* PriceCell.swift */,
@@ -115,6 +132,7 @@
 				58886738223A38590051377B /* PairCell.swift */,
 				5888673A223A48BA0051377B /* PairViewController.swift */,
 				58812149223B395D00508F03 /* Binance.swift */,
+				58DF2AD1224C1D51002FBF7E /* Model.xcdatamodeld */,
 			);
 			path = CryptoTracker;
 			sourceTree = "<group>";
@@ -268,12 +286,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				58DF2AAA2241B809002FBF7E /* PersistenceService.swift in Sources */,
+				58DF2AD8224C2F55002FBF7E /* Price+CoreDataClass.swift in Sources */,
 				5888673B223A48BA0051377B /* PairViewController.swift in Sources */,
 				5888670722380D160051377B /* ViewController.swift in Sources */,
+				58DF2AD3224C1D51002FBF7E /* Model.xcdatamodeld in Sources */,
 				58886739223A38590051377B /* PairCell.swift in Sources */,
+				58DF2ADA224C2F55002FBF7E /* Pair+CoreDataClass.swift in Sources */,
+				58DF2ADB224C2F55002FBF7E /* Pair+CoreDataProperties.swift in Sources */,
 				588867332239E23C0051377B /* PriceCell.swift in Sources */,
 				5881214A223B395D00508F03 /* Binance.swift in Sources */,
 				5888670522380D160051377B /* AppDelegate.swift in Sources */,
+				58DF2AD9224C2F55002FBF7E /* Price+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,6 +626,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		58DF2AD1224C1D51002FBF7E /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				58DF2AD2224C1D51002FBF7E /* Model.xcdatamodel */,
+			);
+			currentVersion = 58DF2AD2224C1D51002FBF7E /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 588866F922380D160051377B /* Project object */;
 }

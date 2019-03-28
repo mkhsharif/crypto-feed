@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Pair" representedClassName="Pair" syncable="YES" codeGenerationType="class">
+        <attribute name="added" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="base" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pair" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quote" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Price" representedClassName="Price" syncable="YES" codeGenerationType="class">
+        <attribute name="percentChange" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="price" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="ticker" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Pair" positionX="-45" positionY="0" width="128" height="105"/>
+        <element name="Price" positionX="-18" positionY="27" width="128" height="90"/>
+    </elements>
+</model>

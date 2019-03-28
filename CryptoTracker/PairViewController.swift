@@ -59,7 +59,7 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
         currentPairs[indexPath.row].added = !currentPairs[indexPath.row].added
         
         if(currentPairs[indexPath.row].added) {
-            self.delegate?.addPair(pair: currentPairs[indexPath.row].pair)
+            self.delegate?.addPair(pair: currentPairs[indexPath.row].pair!)
         } else {
             for price in (self.delegate?.getPrices())! {
                 if currentPairs[indexPath.row].pair == price.ticker {
@@ -80,7 +80,7 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
         currentPairs = pairs.filter({ pairs -> Bool in
-            return pairs.pair.contains(searchText)
+            return pairs.pair!.contains(searchText)
         })
         tableView.reloadData()
     }
@@ -88,19 +88,19 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
 }
 
 
-class Pair {
-    var pair = ""
-    var base = ""
-    var quote = ""
-    var added = false
-    
-    convenience init(pair: String, base: String, quote: String, added: Bool) {
-        self.init()
-        self.pair = pair
-        self.base = base
-        self.quote = quote
-        self.added = added
-    }
-}
+//class Pair: NSObject {
+//    var pair = ""
+//    var base = ""
+//    var quote = ""
+//    var added = false
+//
+////    convenience init(pair: String, base: String, quote: String, added: Bool) {
+////        self.init()
+////        self.pair = pair
+////        self.base = base
+////        self.quote = quote
+////        self.added = added
+////    }
+//}
 
 
