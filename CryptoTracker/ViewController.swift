@@ -52,10 +52,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     //var pairs = [String: Bool]()
     
     // store data locally
-    let defaults = UserDefaults.standard
+    //let defaults = UserDefaults.standard
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
        
         
         let fetchReqPrice: NSFetchRequest<Price> = Price.fetchRequest()
@@ -68,18 +69,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             self.prices = prices
             self.tableView.reloadData()
         } catch {}
-        
-       
-        
-//        do {
-//            let pairs = try PersistenceService.context.fetch(fetchReqPair)
-//            self.pairs = pairs
-//            let prices = try PersistenceService.context.fetch(fetchReqPrice)
-//            self.prices = prices
-//        } catch {}
-        
-        
-         let pairk = Pair(context: PersistenceService.context)
         
         self.title = "Crypto Feed"
         
@@ -133,7 +122,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         
         
-        let timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updatePrices), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updatePrices), userInfo: nil, repeats: true)
         
         
     }
@@ -156,6 +145,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
          cell.tickerOutlet.text = prices[indexPath.row].ticker
         
         // show price
+        print(prices)
         if Double(prices[indexPath.row].price!)! >= 1.0 {
             let curPrice = round(100.0 * Double(prices[indexPath.row].price!)!) / 100.0
             cell.priceOutlet.text = "$\(curPrice)"
@@ -191,8 +181,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         for pair in pairs {
             if prices[indexPath.row].ticker == pair.pair {
                 pair.added = false
+                
             }
         }
+        let price = prices[indexPath.row]
+        print(price)
+        PersistenceService.delete(price)
+        PersistenceService.saveContext()
         prices.remove(at: indexPath.row)
         tableView.reloadData()
     }
@@ -239,26 +234,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 price.ticker = lastPrice.symbol
                 
                 self.prices.append(price)
-                
-                
-//                self.prices.append(Price(price: lastPrice.lastPrice, percentChange: lastPrice.priceChangePercent, ticker: lastPrice.symbol))
-                
-          
-                
+                PersistenceService.saveContext()
+                print(self.prices)
+                self.tableView.reloadData()
                 
             } catch let jsonErr {
                 print("Error: ", jsonErr)
             }
         }.resume()
         
-         PersistenceService.saveContext()
-         self.tableView.reloadData()
+        
     
     }
     
     func removePrice(index: Int) {
         prices.remove(at: index)
         tableView.reloadData()
+        PersistenceService.saveContext()
     }
     
     

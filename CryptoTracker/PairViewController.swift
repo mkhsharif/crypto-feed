@@ -80,6 +80,7 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }
         currentPairs = pairs.filter({ pairs -> Bool in
+            print(pairs.pair!.contains(searchText))
             return pairs.pair!.contains(searchText)
         })
         tableView.reloadData()
