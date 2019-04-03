@@ -72,7 +72,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.title = "Crypto Feed"
         
-        if(true) {
+        if(pairs.count == 0) {
             
             let jsonUrlString = "https://api.binance.com/api/v1/exchangeInfo"
             
