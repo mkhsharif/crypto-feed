@@ -79,16 +79,7 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
             return
             
         }
-        print("HOW MANY: ", pairs.count)
-//        for i in 0...pairs.count - 1 {
-//            if(i.pair == nil) {
-//               pairs.remove(at: i)
-//
-//            } else {
-//                print("NILLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL", i)
-//            }
-//
-//        }
+       
         currentPairs = pairs.filter({ pairs -> Bool in
             return pairs.pair!.contains(searchText)
         })

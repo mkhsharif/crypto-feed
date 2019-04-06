@@ -165,6 +165,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return cell
     }
     
+    // load web view chart from tradingview
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let url = URL(string: "https://www.tradingview.com/chart/?symbol=BINANCE:\(prices[indexPath.row].ticker!)")
@@ -233,10 +234,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 price.percentChange = lastPrice.priceChangePercent
                 price.ticker = lastPrice.symbol
                 
+
                 self.prices.append(price)
                 PersistenceService.saveContext()
                 print(self.prices)
-                self.tableView.reloadData()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
                 
             } catch let jsonErr {
                 print("Error: ", jsonErr)
@@ -259,12 +263,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func updatePrices() {
+        print("CALLED")
         for price in prices {
-            let urlReq = "https://api.binance.com/api/v1/ticker/24hr?symbol=\(price.ticker)"
+            let urlReq = "https://api.binance.com/api/v1/ticker/24hr?symbol=\(price.ticker!)"
             
             //print(urlReq)
-            
-            guard let url = URL(string: urlReq) else { return }
+            guard let url = URL(string: urlReq) else { print("HERE"); return }
             print(url)
             URLSession.shared.dataTask(with: url) {(data, res, err) in
                 
@@ -274,17 +278,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 do {
                     let lastPrice = try JSONDecoder().decode(LastPrice.self, from: data)
                     print(lastPrice)
-                    price.price = lastPrice.lastPrice
-                    price.percentChange = lastPrice.priceChangePercent
-            
+                    price.setValue(lastPrice.lastPrice, forKey: "price")
+                    price.setValue(lastPrice.priceChangePercent, forKey: "percentChange")
+                    PersistenceService.saveContext()
+                    // UIKit isn't thread safe. The UI should only be updated from main thread
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+
                     
                 } catch let jsonErr {
                     print("Error: ", jsonErr)
                 }
             }.resume()
-            
         }
-        self.tableView.reloadData()
+        
         
     }
     
