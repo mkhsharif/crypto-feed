@@ -21,9 +21,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <wkWebView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PpG-Cp-Ybi">
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PpG-Cp-Ybi">
                                 <rect key="frame" x="0.0" y="88" width="375" height="222"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -51,28 +50,35 @@
                                             <subviews>
                                                 <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" text="5.55%" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z30-6I-Gfg">
                                                     <rect key="frame" x="254" y="7" width="97" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES"/>
                                                     <color key="backgroundColor" red="0.0" green="0.97680455450000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="17"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="BTC/USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sye-bi-3Xj">
-                                                    <rect key="frame" x="15" y="13" width="108" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BTC/USDT" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sye-bi-3Xj">
+                                                    <rect key="frame" x="15" y="13" width="81.333333333333329" height="20"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="$3866.82" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyh-Rh-2JC">
-                                                    <rect key="frame" x="111" y="13" width="135" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3866.82" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fyh-Rh-2JC">
+                                                    <rect key="frame" x="148" y="11.333333333333334" width="79" height="22.333333333333329"/>
                                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                                     <color key="textColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.17046218590000001" green="0.2260012709" blue="0.30399276450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="fyh-Rh-2JC" firstAttribute="centerX" secondItem="7YB-wW-Nmc" secondAttribute="centerX" id="1nh-cV-f1p"/>
+                                                <constraint firstItem="sye-bi-3Xj" firstAttribute="leading" secondItem="7YB-wW-Nmc" secondAttribute="leading" constant="15" id="DSZ-RQ-ECA"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="sye-bi-3Xj" secondAttribute="bottom" constant="1" id="Sw2-PL-MRt"/>
+                                                <constraint firstItem="fyh-Rh-2JC" firstAttribute="centerY" secondItem="7YB-wW-Nmc" secondAttribute="centerY" id="erh-Ih-eaU"/>
+                                                <constraint firstItem="sye-bi-3Xj" firstAttribute="top" secondItem="7YB-wW-Nmc" secondAttribute="topMargin" constant="2" id="i5g-2i-aHF"/>
+                                                <constraint firstItem="sye-bi-3Xj" firstAttribute="leading" secondItem="7YB-wW-Nmc" secondAttribute="leadingMargin" id="k0e-7j-eCf"/>
+                                            </constraints>
+                                            <variation key="heightClass=compact-widthClass=compact" hidden="YES"/>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="percentChangeOutlet" destination="Z30-6I-Gfg" id="Mpf-QC-lBI"/>
@@ -88,6 +94,12 @@
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.17046218587110751" green="0.22600127090288022" blue="0.30399276453005186" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="PpG-Cp-Ybi" secondAttribute="trailing" id="FQW-R1-zKd"/>
+                            <constraint firstItem="PpG-Cp-Ybi" firstAttribute="top" secondItem="etj-1Y-WWA" secondAttribute="bottom" id="NRW-BP-ajX"/>
+                            <constraint firstItem="r1x-Cj-axf" firstAttribute="top" secondItem="PpG-Cp-Ybi" secondAttribute="bottom" constant="419" id="PNP-kz-VdA"/>
+                            <constraint firstItem="PpG-Cp-Ybi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zE6-hQ-btj"/>
+                        </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="4V4-kf-Ff2"/>
@@ -95,6 +107,16 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="beA-1H-qP0">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="0Yg-rB-j6v">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xyV-zv-dcs">
+                                <rect key="frame" x="16" y="7" width="83" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Full Chart"/>
+                            </button>
+                            <connections>
+                                <segue destination="boS-z8-ZR7" kind="show" id="5GC-Xt-jtS"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XiR-A9-60b">
                             <connections>
                                 <segue destination="mf8-6k-Kcc" kind="show" id="ibI-iL-KZL"/>
@@ -110,6 +132,40 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="996" y="25.862068965517242"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="aVv-Vo-C2T">
+            <objects>
+                <viewController id="boS-z8-ZR7" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SJS-1I-aTp"/>
+                        <viewControllerLayoutGuide type="bottom" id="QgG-JW-vU0"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pcX-Ux-eqc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="job-no-Z1E">
+                                <rect key="frame" x="0.0" y="88" width="375" height="675"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="job-no-Z1E" firstAttribute="leading" secondItem="pcX-Ux-eqc" secondAttribute="leading" id="0wx-HM-YBU"/>
+                            <constraint firstItem="QgG-JW-vU0" firstAttribute="top" secondItem="job-no-Z1E" secondAttribute="bottom" constant="-34" id="E6s-CD-q5u"/>
+                            <constraint firstAttribute="trailing" secondItem="job-no-Z1E" secondAttribute="trailing" id="RNS-Yo-UaW"/>
+                            <constraint firstItem="job-no-Z1E" firstAttribute="top" secondItem="SJS-1I-aTp" secondAttribute="bottom" id="e4v-B8-7RB"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BWJ-ZF-fq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1933.5999999999999" y="-341.37931034482762"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0fe-gd-rB5">
