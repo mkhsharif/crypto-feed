@@ -112,14 +112,14 @@
                                 <rect key="frame" x="16" y="7" width="83" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Full Chart"/>
+                                <connections>
+                                    <segue destination="boS-z8-ZR7" kind="show" identifier="chartView" id="0Qk-Pp-3Fh"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <segue destination="boS-z8-ZR7" kind="show" id="5GC-Xt-jtS"/>
-                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XiR-A9-60b">
                             <connections>
-                                <segue destination="mf8-6k-Kcc" kind="show" id="ibI-iL-KZL"/>
+                                <segue destination="mf8-6k-Kcc" kind="show" identifier="pairView" id="ibI-iL-KZL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -133,10 +133,10 @@
             </objects>
             <point key="canvasLocation" x="996" y="25.862068965517242"/>
         </scene>
-        <!--View Controller-->
+        <!--Chart View Controller-->
         <scene sceneID="aVv-Vo-C2T">
             <objects>
-                <viewController id="boS-z8-ZR7" sceneMemberID="viewController">
+                <viewController id="boS-z8-ZR7" customClass="ChartViewController" customModule="CryptoTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="SJS-1I-aTp"/>
                         <viewControllerLayoutGuide type="bottom" id="QgG-JW-vU0"/>
@@ -162,6 +162,9 @@
                             <constraint firstItem="job-no-Z1E" firstAttribute="top" secondItem="SJS-1I-aTp" secondAttribute="bottom" id="e4v-B8-7RB"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="webView" destination="job-no-Z1E" id="hmU-Hd-SNI"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BWJ-ZF-fq4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -195,6 +195,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     // on segue (plus button) we can change things about the file before it loads
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // return if not pair view
+        guard segue.identifier == "pairView" else { return }
+    
         let pairVC = segue.destination as! PairViewController
         pairVC.delegate = self
     }

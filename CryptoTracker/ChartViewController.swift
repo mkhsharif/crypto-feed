@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import WebKit
 
-class ChartViewController: UIViewController {
-
+class ChartViewController: UIViewController, WKUIDelegate, WKNavigationDelegate  {
+    
+    
+    @IBOutlet weak var webView: WKWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
