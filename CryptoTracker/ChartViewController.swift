@@ -12,18 +12,46 @@ import WebKit
 class ChartViewController: UIViewController, WKUIDelegate, WKNavigationDelegate  {
     
     
+    var delegate: UrlReq?
+
+    
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // force landscape
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-
+//         // force landscape
+//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+//        UIDevice.current.setValue(value, forKey: "orientation")
+        
         // Do any additional setup after loading the view.
+        webView.load(URLRequest(url: (delegate?.getUrl())!))
     }
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .landscapeLeft
+    }
+
+    override var shouldAutorotate: Bool {
+        return true
+    }
+//
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//        //AppUtility.lockOrientation(.landscapeLeft)
+//        // Or to rotate and lock
+//        AppUtility.lockOrientation(.portrait, andRotateTo: .landscapeLeft)
+//
+//    }
+//
+//    override func viewWillDisappear(_ animated: Bool) {
+//        super.viewWillDisappear(animated)
+//
+//        // Don't forget to reset when view is being removed
+//        AppUtility.lockOrientation(.all)
+//    }
+//
 
     /*
     // MARK: - Navigation
@@ -36,3 +64,4 @@ class ChartViewController: UIViewController, WKUIDelegate, WKNavigationDelegate 
     */
 
 }
+

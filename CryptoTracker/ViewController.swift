@@ -18,6 +18,12 @@ protocol EditList {
     func removePrice(index: Int)
 }
 
+protocol UrlReq {
+    func getUrl() -> URL?
+}
+
+
+// decode json 
 struct Ticker: Decodable {
     let symbols: [Symbol]
 }
@@ -34,18 +40,17 @@ struct LastPrice: Decodable {
     let lastPrice: String
 }
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate, WKNavigationDelegate, EditList {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, WKUIDelegate, WKNavigationDelegate, EditList, UrlReq {
     
 
-
-    
-    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var webView: WKWebView!
     
     
     var prices: [Price] = []
     var pairs: [Pair] = []
+    
+    var chartUrl: URL?
     
    // var updateTimer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(ViewController.updatePrices), userInfo: nil, repeats: true)
     
@@ -72,7 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         self.title = "Crypto Feed"
         
-        if(pairs.count == 0) {
+        if pairs.count == 0 {
             
             let jsonUrlString = "https://api.binance.com/api/v1/exchangeInfo"
             
@@ -107,7 +112,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     //self.pairs.sort {$0.pair < $1.pair}
                     
                    
-                    print("DONE")
+                    //print("DONE")
                     PersistenceService.saveContext()
                     
                     
@@ -115,17 +120,39 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     print("Error: ", jsonErr)
                 }
             }.resume()
+            
         
        } else {
             //pairs = self.defaults.array(forKey: "pairs") as! [Pair]
         }
-        
-        
-        
         _ = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(updatePrices), userInfo: nil, repeats: true)
         
         
+        
+        if prices.count >= 1 {
+            self.chartUrl = URL(string: "https://www.tradingview.com/chart/?symbol=BINANCE:\(prices[0].ticker!)")
+            webView.load(URLRequest(url: chartUrl!))
+        }
+        
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //AppUtility.lockOrientation(.portrait)
+        // Or to rotate and lock
+        AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Don't forget to reset when view is being removed
+        AppUtility.lockOrientation(.all)
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return prices.count
@@ -145,7 +172,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
          cell.tickerOutlet.text = prices[indexPath.row].ticker
         
         // show price
-        print(prices)
+        //print(prices)
         if Double(prices[indexPath.row].price!)! >= 1.0 {
             let curPrice = round(100.0 * Double(prices[indexPath.row].price!)!) / 100.0
             cell.priceOutlet.text = "$\(curPrice)"
@@ -168,8 +195,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // load web view chart from tradingview
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let url = URL(string: "https://www.tradingview.com/chart/?symbol=BINANCE:\(prices[indexPath.row].ticker!)")
-        webView.load(URLRequest(url: url!))
+        self.chartUrl = URL(string: "https://www.tradingview.com/chart/?symbol=BINANCE:\(prices[indexPath.row].ticker!)")
+        webView.load(URLRequest(url: chartUrl!))
     }
     
     // make table view cell editable
@@ -186,7 +213,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
         let price = prices[indexPath.row]
-        print(price)
+        //print(price)
         PersistenceService.delete(price)
         PersistenceService.saveContext()
         prices.remove(at: indexPath.row)
@@ -196,10 +223,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     // on segue (plus button) we can change things about the file before it loads
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // return if not pair view
-        guard segue.identifier == "pairView" else { return }
-    
-        let pairVC = segue.destination as! PairViewController
-        pairVC.delegate = self
+        if segue.identifier == "toPairView" {
+            let pairVC = segue.destination as! PairViewController
+            pairVC.delegate = self
+        }
+//    
+        if segue.identifier == "toChartView" {
+            let chartVC = segue.destination as! ChartViewController
+            chartVC.delegate = self
+        }
+//
     }
     
 //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -219,18 +252,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let urlReq = "https://api.binance.com/api/v1/ticker/24hr?symbol=\(pair)"
         
-        print(urlReq)
+        //print(urlReq)
         
          guard let url = URL(string: urlReq) else { return }
-        print(url)
+        //print(url)
         URLSession.shared.dataTask(with: url) {(data, res, err) in
           
             guard let data = data else { return }
-            print(data)
+            //print(data)
             
             do {
                 let lastPrice = try JSONDecoder().decode(LastPrice.self, from: data)
-                print(lastPrice)
+                //print(lastPrice)
                 
                 let price = Price(context: PersistenceService.context)
                 price.price = lastPrice.lastPrice
@@ -266,21 +299,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     @objc func updatePrices() {
-        print("CALLED")
+        //print("CALLED")
         for price in prices {
             let urlReq = "https://api.binance.com/api/v1/ticker/24hr?symbol=\(price.ticker!)"
             
             //print(urlReq)
             guard let url = URL(string: urlReq) else { print("HERE"); return }
-            print(url)
+            //print(url)
             URLSession.shared.dataTask(with: url) {(data, res, err) in
                 
                 guard let data = data else { return }
-                print(data)
+                //print(data)
                 
                 do {
                     let lastPrice = try JSONDecoder().decode(LastPrice.self, from: data)
-                    print(lastPrice)
+                    //print(lastPrice)
                     price.setValue(lastPrice.lastPrice, forKey: "price")
                     price.setValue(lastPrice.priceChangePercent, forKey: "percentChange")
                     PersistenceService.saveContext()
@@ -306,6 +339,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func getPrices() -> [Price] {
         return prices
     }
+    
+    func getUrl() -> URL? {
+        return chartUrl
+    }
+    
 
 }
 

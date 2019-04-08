@@ -17,21 +17,15 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
     let check = UIImage(named: "checkmark")
     var delegate: EditList?
     
-   
-
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    
-
     
     override func viewDidLoad() {
         
         self.title = "Pairs"
-        
         pairs = (delegate?.getPairs())!
         currentPairs = pairs
     }
-    
     
     // table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

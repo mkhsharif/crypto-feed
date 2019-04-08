@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		581A99E722597A08006CF0D1 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A99E622597A08006CF0D1 /* ChartViewController.swift */; };
+		582EBEDB225A163E00A78534 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EBEDA225A163E00A78534 /* AppUtility.swift */; };
 		5881214A223B395D00508F03 /* Binance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58812149223B395D00508F03 /* Binance.swift */; };
 		5888670522380D160051377B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888670422380D160051377B /* AppDelegate.swift */; };
 		5888670722380D160051377B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5888670622380D160051377B /* ViewController.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		581A99E622597A08006CF0D1 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
+		582EBEDA225A163E00A78534 /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		58812149223B395D00508F03 /* Binance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binance.swift; sourceTree = "<group>"; };
 		5888670122380D160051377B /* CryptoTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CryptoTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5888670422380D160051377B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -125,17 +127,18 @@
 				58DF2AD7224C2F55002FBF7E /* Pair+CoreDataProperties.swift */,
 				58DF2AA92241B809002FBF7E /* PersistenceService.swift */,
 				5888670422380D160051377B /* AppDelegate.swift */,
-				5888670622380D160051377B /* ViewController.swift */,
 				588867322239E23C0051377B /* PriceCell.swift */,
 				5888670822380D160051377B /* Main.storyboard */,
 				5888670B22380D180051377B /* Assets.xcassets */,
 				5888670D22380D180051377B /* LaunchScreen.storyboard */,
 				5888671022380D180051377B /* Info.plist */,
 				58886738223A38590051377B /* PairCell.swift */,
+				5888670622380D160051377B /* ViewController.swift */,
 				5888673A223A48BA0051377B /* PairViewController.swift */,
+				581A99E622597A08006CF0D1 /* ChartViewController.swift */,
 				58812149223B395D00508F03 /* Binance.swift */,
 				58DF2AD1224C1D51002FBF7E /* Model.xcdatamodeld */,
-				581A99E622597A08006CF0D1 /* ChartViewController.swift */,
+				582EBEDA225A163E00A78534 /* AppUtility.swift */,
 			);
 			path = CryptoTracker;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				582EBEDB225A163E00A78534 /* AppUtility.swift in Sources */,
 				58DF2AAA2241B809002FBF7E /* PersistenceService.swift in Sources */,
 				58DF2AD8224C2F55002FBF7E /* Price+CoreDataClass.swift in Sources */,
 				5888673B223A48BA0051377B /* PairViewController.swift in Sources */,

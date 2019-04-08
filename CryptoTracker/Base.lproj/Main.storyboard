@@ -113,13 +113,13 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Full Chart"/>
                                 <connections>
-                                    <segue destination="boS-z8-ZR7" kind="show" identifier="chartView" id="0Qk-Pp-3Fh"/>
+                                    <segue destination="boS-z8-ZR7" kind="show" identifier="toChartView" id="0Qk-Pp-3Fh"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="XiR-A9-60b">
                             <connections>
-                                <segue destination="mf8-6k-Kcc" kind="show" identifier="pairView" id="ibI-iL-KZL"/>
+                                <segue destination="mf8-6k-Kcc" kind="show" identifier="toPairView" id="ibI-iL-KZL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -147,14 +147,14 @@
                         <subviews>
                             <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="job-no-Z1E">
                                 <rect key="frame" x="0.0" y="88" width="375" height="675"/>
-                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.17046218590000001" green="0.2260012709" blue="0.30399276450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <wkWebViewConfiguration key="configuration">
                                     <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
                                     <wkPreferences key="preferences"/>
                                 </wkWebViewConfiguration>
                             </wkWebView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.17046218590000001" green="0.2260012709" blue="0.30399276450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="job-no-Z1E" firstAttribute="leading" secondItem="pcX-Ux-eqc" secondAttribute="leading" id="0wx-HM-YBU"/>
                             <constraint firstItem="QgG-JW-vU0" firstAttribute="top" secondItem="job-no-Z1E" secondAttribute="bottom" constant="-34" id="E6s-CD-q5u"/>
@@ -206,7 +206,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="awi-mW-YOv">
                                 <rect key="frame" x="0.0" y="88" width="375" height="641"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.17046218590000001" green="0.2260012709" blue="0.30399276450000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="OXS-lV-5nl">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
