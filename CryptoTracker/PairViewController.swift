@@ -27,6 +27,22 @@ class PairViewController: UIViewController, UITableViewDelegate, UITableViewData
         currentPairs = pairs
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //AppUtility.lockOrientation(.landscapeLeft)
+        // Or to rotate and lock
+        AppUtility.lockOrientation(.portrait, andRotateTo: .portrait)
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // Don't forget to reset when view is being removed
+        AppUtility.lockOrientation(.all)
+    }
+    
     // table
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentPairs.count
