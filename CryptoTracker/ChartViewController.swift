@@ -20,21 +20,11 @@ class ChartViewController: UIViewController, WKUIDelegate, WKNavigationDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//         // force landscape
-//        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-//        UIDevice.current.setValue(value, forKey: "orientation")
-        
         // Do any additional setup after loading the view.
         webView.load(URLRequest(url: (delegate?.getUrl())!))
     }
     
-//    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-//        return .landscapeLeft
-//    }
-//
-//    override var shouldAutorotate: Bool {
-//        return true
-//    }
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

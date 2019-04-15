@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		581631EB2264069C005851DA /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 581631EA2264069C005851DA /* WebKit.framework */; };
 		581A99E722597A08006CF0D1 /* ChartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 581A99E622597A08006CF0D1 /* ChartViewController.swift */; };
 		582EBEDB225A163E00A78534 /* AppUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 582EBEDA225A163E00A78534 /* AppUtility.swift */; };
 		5881214A223B395D00508F03 /* Binance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58812149223B395D00508F03 /* Binance.swift */; };
@@ -46,6 +47,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		581631EA2264069C005851DA /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		581A99E622597A08006CF0D1 /* ChartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartViewController.swift; sourceTree = "<group>"; };
 		582EBEDA225A163E00A78534 /* AppUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUtility.swift; sourceTree = "<group>"; };
 		58812149223B395D00508F03 /* Binance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Binance.swift; sourceTree = "<group>"; };
@@ -78,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				581631EB2264069C005851DA /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,6 +101,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		581631E92264069B005851DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				581631EA2264069C005851DA /* WebKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		588866F822380D160051377B = {
 			isa = PBXGroup;
 			children = (
@@ -105,6 +116,7 @@
 				5888671822380D190051377B /* CryptoTrackerTests */,
 				5888672322380D190051377B /* CryptoTrackerUITests */,
 				5888670222380D160051377B /* Products */,
+				581631E92264069B005851DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
